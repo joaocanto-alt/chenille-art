@@ -1,10 +1,26 @@
 <!doctype html>
 <html lang="pt-BR">
-<head>
+<head> 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Chenille Art — flores e presentes artesanais</title>
+
+<title>Chenille Art — flores e presentes artesanais em destaque</title>
+
 <meta name="description" content="Flores de chenille, buquês, plantas decorativas, chaveiros e apliques feitos à mão.">
+
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://chenilleart.netlify.app/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Chenille Art">
+<meta property="og:title" content="Chenille Art — flores e presentes artesanais em destaque">
+<meta property="og:description" content="Flores de chenille, buquês, plantas decorativas, chaveiros e apliques feitos à mão.">
+<meta property="og:url" content="https://chenilleart.netlify.app/">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chenille Art — flores e presentes artesanais em destaque">
+<meta name="twitter:description" content="Flores de chenille, buquês, plantas decorativas, chaveiros e apliques feitos à mão.">
+
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%F0%9F%8C%B7%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
@@ -324,15 +340,7 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.15;margin:0}
 </div>
 <script>
 /* LOGIN COM GOOGLE: cole aqui o objeto firebaseConfig do seu projeto Firebase, no lugar de null. Veja o passo a passo. */
-window.FIREBASE_CONFIG = {
-  apiKey: "AIzaSyA3If91Fx6QyJqsgaZmpWxXvQmLOLCv4UY",
-  authDomain: "chenille-art.firebaseapp.com",
-  projectId: "chenille-art",
-  storageBucket: "chenille-art.firebasestorage.app",
-  messagingSenderId: "499375934980",
-  appId: "1:499375934980:web:3cdc2fe53453ad60996f51",
-  measurementId: "G-PEGCMWPZ8V"
-};
+window.FIREBASE_CONFIG = null;
 </script>
 <script>
 'use strict';
@@ -558,36 +566,20 @@ function start() {
   const save = () => setDoc(doc(db, 'carts', user.uid), { items: cart.get(), updatedAt: Date.now() })
     .catch(() => cart.notify('Não foi possível salvar o carrinho agora.'));
 
-  
-onAuthStateChanged(auth, async u => {
-  user = u;
-  ready = false;
-  paint();
-
-  if (!u) {
-    ready = true;
-    return;
-  }
-
-  try {
-    const snap = await getDoc(doc(db, 'carts', u.uid));
-
-    if (snap.exists()) {
-      const items = snap.data().items || [];
-      cart.set(items);
-    }
-
-    ready = true;
-    await save();
-    paint();
-  } catch (e) {
-    console.error('Erro ao carregar carrinho:', e);
-    ready = true;
-    paint();
-    cart.notify('Não foi possível carregar seu carrinho salvo.');
-  }
-});
-
+  onAuthStateChanged(auth, async u => {
+    user = u; ready = false; paint();
+    if (!u) return;
+    try {
+      const snap = await getDoc(doc(db, 'carts', u.uid));
+      const merged = new Map();
+      [...(snap.exists() ? snap.data().items || [] : []), ...cart.get()].forEach(i => {
+        const k = i.id + '|' + (i.variant || ''), cur = merged.get(k);
+        merged.set(k, cur ? { ...cur, qty: Math.min(99, cur.qty + i.qty) } : { ...i });
+      });
+      cart.set([...merged.values()]);
+      ready = true; await save();
+    } catch (e) { console.error(e); cart.notify('Não foi possível carregar seu carrinho salvo.'); }
+  });
 
   document.addEventListener('cart:change', () => {
     if (!user || !ready) return;
