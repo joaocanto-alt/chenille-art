@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chenille Art — flores e presentes artesanais</title>
+<meta name="description" content="Flores de chenille, buquês, plantas decorativas, chaveiros e apliques feitos à mão.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=16">
+</head>
+<body>
+<a class="skip" href="#main">Ir para o conteúdo</a>
+<header class="header">
+  <div class="wrap bar">
+    <a class="brand" href="#inicio" aria-label="Chenille Art, início">Chenille Art</a>
+    <nav class="links" aria-label="Navegação principal">
+      <a href="#inicio">Início</a><a href="#catalogo">Catálogo</a><a href="#encomendas">Encomendas</a><a href="#contato">Contato</a>
+    </nav>
+    <button class="btn btn-solid" id="open-cart" type="button" aria-haspopup="dialog">Carrinho <span class="count" id="cart-count" aria-label="itens no carrinho">0</span></button>
+  </div>
+</header>
+
+<main id="main">
+<section class="pg" id="inicio">
+  <div class="hero wrap hero-grid">
+    <div>
+      <p class="eyebrow">Feito à mão, com carinho</p>
+      <h1>Pequenos encantos, grandes sentimentos.</h1>
+      <p class="lead">Bem-vindo(a) à Chenille Art! 🌷 Aqui, cada detalhe é feito à mão para transformar flores, ideias e pequenos encantos em peças especiais. Explore nosso catálogo, escolha seus favoritos e, se tiver uma ideia diferente, fale conosco para criar algo personalizado para você!</p>
+      <div class="hero-cta"><a class="btn btn-solid" href="#catalogo">Explorar catálogo</a><a class="btn btn-ghost" href="#encomendas">Encomendar uma peça</a></div>
+    </div>
+    <button class="zoom" id="zoom" type="button" aria-label="Ampliar imagem da promoção"><img class="hero-banner" id="hero-banner" width="1076" height="536" alt="Na compra de 1 unidade de flor lótus, lírio ou girassol, ganhe um marca páginas de sua preferência: Cinderela, Rapunzel, Tiana ou Bela. Chenille Art."></button>
+  </div>
+  <div class="wrap sec"><h2>Escolha pelo que você procura</h2><div class="tiles" id="tiles"></div></div>
+  <div class="wrap sec"><h2>Seleção da casa</h2><div class="grid four" id="featured"></div></div>
+</section>
+
+<section class="pg" id="catalogo" hidden>
+  <div class="pagehead"><div class="wrap"><h1>Nosso catálogo</h1><p>Peças artesanais para presentear, colecionar e decorar.</p></div></div>
+  <div class="wrap cat-layout">
+    <aside class="side">
+      <label class="search"><span class="sr">Buscar produtos</span><input id="search" type="search" placeholder="Buscar pelo nome do produto" autocomplete="off"></label>
+      <h3>Categorias</h3>
+      <div id="filters" role="group" aria-label="Filtrar por categoria"></div>
+      <div class="sidebox"><h3>Não achou o que queria?</h3><p>Peça uma criação personalizada.</p><a class="btn btn-solid" href="#encomendas">Encomendar</a></div>
+    </aside>
+    <div>
+      <div class="listhead"><span id="result-count" aria-live="polite"></span><label>Ordenar: <select id="sort"><option value="">Ordem do catálogo</option><option value="asc">Menor preço</option><option value="desc">Maior preço</option><option value="az">Nome (A–Z)</option></select></label></div>
+      <div class="grid" id="product-grid"></div>
+      <div class="none" id="no-results" hidden><svg viewBox="0 0 64 64" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="28" cy="28" r="16"/><path d="M40 40l14 14M22 28h12"/></g></svg><p>Não encontramos produtos com esse nome.<br>Tente outra busca ou categoria.</p><button class="btn btn-ghost" id="clear" type="button">Limpar filtros</button></div>
+    </div>
+  </div>
+</section>
+
+<section class="pg" id="encomendas" hidden>
+  <div class="wrap split">
+    <div>
+      <p class="eyebrow">Uma peça só sua</p>
+      <h1>✨ Não encontrou o que procurava? Vamos criar juntos!</h1>
+      <p class="lead">Tem uma ideia diferente ou deseja um produto que ainda não aparece no nosso catálogo? 💗 Na Chenille Art, você pode enviar sua referência, foto ou ideia para solicitar uma criação personalizada.</p>
+      <p class="lead">Para que possamos organizar a produção com carinho, entre em contato com pelo menos 1 semana de antecedência.</p>
+      <p class="lead">Envie sua ideia pelo WhatsApp e vamos conversar sobre as possibilidades de criação, o valor e o prazo do seu pedido!</p>
+      <p class="note">A disponibilidade, o preço e o prazo precisam ser confirmados pela loja. Nem toda solicitação poderá ser aceita.</p>
+      <a class="btn btn-solid" href="https://wa.me/5551981870636?text=Ol%C3%A1!%20Gostaria%20de%20consultar%20uma%20encomenda%20personalizada%20na%20Chenille%20Art." target="_blank" rel="noopener noreferrer">Quero encomendar pelo WhatsApp</a>
+    </div>
+    <div class="steps"><h2>Como funciona</h2>
+      <div class="step"><b>1</b><div><h3>Envie sua ideia</h3><p>Mande referência, foto ou ideia pelo WhatsApp.</p></div></div>
+      <div class="step"><b>2</b><div><h3>Combinamos os detalhes</h3><p>Conversamos sobre as possibilidades, o valor e o prazo.</p></div></div>
+      <div class="step"><b>3</b><div><h3>Produção com carinho</h3><p>Entre em contato com pelo menos 1 semana de antecedência.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="pg" id="contato" hidden>
+  <div class="wrap split">
+    <div>
+      <p class="eyebrow">Contato</p>
+      <h1>Vamos conversar?</h1>
+      <p class="lead">Fale com a Chenille Art para tirar dúvidas, conhecer as peças e consultar valores e disponibilidade. Prefere uma peça só sua? Veja a página de <a class="link" href="#encomendas">encomendas</a>.</p>
+    </div>
+    <div class="cstack">
+      <a class="ccard" href="https://wa.me/5551981870636" target="_blank" rel="noopener noreferrer"><p class="cat">WhatsApp</p><h3>+55 51 98187-0636</h3><span class="btn btn-solid">Abrir conversa</span></a>
+      <a class="ccard" href="https://www.instagram.com/chenilleart_?obrf=MW9wbjRzMzY5NnluYQ==" target="_blank" rel="noopener noreferrer"><p class="cat">Instagram</p><h3>@chenilleart_</h3><span class="btn btn-ghost">Ver perfil</span></a>
+      <div class="sidebox"><h3>Antes de falar com a gente</h3><p>Disponibilidade, preço e prazo são confirmados pela loja. Para encomendas personalizadas, avise com pelo menos 1 semana de antecedência.</p></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="wrap foot">
+    <div><strong class="foot-brand">Chenille Art</strong><p>Obrigada por valorizar o feito à mão! 🌷</p></div>
+    <div class="foot-links"><a href="https://wa.me/5551981870636" target="_blank" rel="noopener noreferrer">WhatsApp · +55 51 98187-0636</a><a href="https://www.instagram.com/chenilleart_?obrf=MW9wbjRzMzY5NnluYQ==" target="_blank" rel="noopener noreferrer">Instagram · @chenilleart_</a></div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<div class="overlay" id="detail" hidden>
+  <section class="panel dialog" role="dialog" aria-modal="true" aria-labelledby="d-title">
+    <button class="close" type="button" data-close aria-label="Fechar detalhes">✕</button>
+    <div class="thumb large" id="d-thumb"></div>
+    <div class="d-info">
+      <p class="cat" id="d-cat"></p><h3 id="d-title"></h3><p id="d-desc"></p><p class="price" id="d-price"></p>
+      <div class="row" id="d-row"><label class="field" id="d-var-wrap" hidden>Cor / variação<select id="d-var"></select></label><label class="field">Quantidade<input id="d-qty" type="number" min="1" max="99" value="1"></label></div>
+      <button class="btn btn-solid" id="d-add" type="button">Adicionar ao carrinho</button>
+    </div>
+  </section>
+</div>
+
+<div class="overlay" id="lightbox" hidden>
+  <button class="close" type="button" data-close aria-label="Fechar imagem">✕</button>
+  <div class="lb"><img id="lb-img" alt=""></div>
+</div>
+
+<div class="overlay right" id="cart" hidden>
+  <aside class="panel drawer" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+    <div class="drawer-head"><h3 id="cart-title">Seu carrinho</h3><button class="close" type="button" data-close aria-label="Fechar carrinho">✕</button></div>
+    <div class="cart-list" id="cart-list"></div>
+    <div class="drawer-foot">
+      <div class="total"><span>Subtotal</span><strong id="cart-total">R$ 0,00</strong></div>
+      <p class="note" id="cart-note">Valores, disponibilidade e prazo são confirmados pela loja.</p>
+      <a class="btn btn-solid" id="checkout" href="https://wa.me/5551981870636" target="_blank" rel="noopener noreferrer">Consultar pedido pelo WhatsApp</a>
+    </div>
+  </aside>
+</div>
+<script src="script.js?v=16" defer></script>
+</body>
+</html>
