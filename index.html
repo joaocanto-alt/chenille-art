@@ -558,20 +558,36 @@ function start() {
   const save = () => setDoc(doc(db, 'carts', user.uid), { items: cart.get(), updatedAt: Date.now() })
     .catch(() => cart.notify('Não foi possível salvar o carrinho agora.'));
 
-  onAuthStateChanged(auth, async u => {
-    user = u; ready = false; paint();
-    if (!u) return;
-    try {
-      const snap = await getDoc(doc(db, 'carts', u.uid));
-      const merged = new Map();
-      [...(snap.exists() ? snap.data().items || [] : []), ...cart.get()].forEach(i => {
-        const k = i.id + '|' + (i.variant || ''), cur = merged.get(k);
-        merged.set(k, cur ? { ...cur, qty: Math.min(99, cur.qty + i.qty) } : { ...i });
-      });
-      cart.set([...merged.values()]);
-      ready = true; await save();
-    } catch (e) { console.error(e); cart.notify('Não foi possível carregar seu carrinho salvo.'); }
-  });
+  
+onAuthStateChanged(auth, async u => {
+  user = u;
+  ready = false;
+  paint();
+
+  if (!u) {
+    ready = true;
+    return;
+  }
+
+  try {
+    const snap = await getDoc(doc(db, 'carts', u.uid));
+
+    if (snap.exists()) {
+      const items = snap.data().items || [];
+      cart.set(items);
+    }
+
+    ready = true;
+    await save();
+    paint();
+  } catch (e) {
+    console.error('Erro ao carregar carrinho:', e);
+    ready = true;
+    paint();
+    cart.notify('Não foi possível carregar seu carrinho salvo.');
+  }
+});
+
 
   document.addEventListener('cart:change', () => {
     if (!user || !ready) return;
