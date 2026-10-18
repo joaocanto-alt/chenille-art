@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chenille Art — ver no celular</title>
+<style>
+body{margin:0;min-height:100vh;background:#e9ddee;font:15px system-ui,sans-serif;color:#3d2d47;display:flex;flex-direction:column;align-items:center;gap:16px;padding:20px 12px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+button{border:1px solid #75539a;background:#fff;color:#5f4180;border-radius:999px;padding:8px 16px;cursor:pointer;font:inherit}
+button[aria-pressed=true]{background:#75539a;color:#fff}
+.phone{border:12px solid #2e2038;border-radius:42px;background:#fff;overflow:hidden;box-shadow:0 20px 50px rgba(46,32,56,.3);transition:width .2s,height .2s}
+iframe{display:block;border:0;width:100%;height:100%;background:#faf6f0}
+p{margin:0;font-size:13px;color:#6d6180;text-align:center}
+</style>
+</head>
+<body>
+<div class="tabs" role="group" aria-label="Tamanho da tela">
+<button type="button" data-w="360" data-h="740">Celular pequeno (360)</button>
+<button type="button" data-w="390" data-h="844" aria-pressed="true">Celular (390)</button>
+<button type="button" data-w="430" data-h="900">Celular grande (430)</button>
+<button type="button" data-w="768" data-h="900">Tablet (768)</button>
+</div>
+<div class="phone" id="phone" style="width:390px;height:844px"><iframe id="site" src="chenille-art-completo.html" title="Chenille Art"></iframe></div>
+<p>Navegue normalmente dentro da tela: abas, catálogo, carrinho e detalhes funcionam. Deixe este arquivo na mesma pasta do chenille-art-completo.html.</p>
+<script>
+document.querySelectorAll('[data-w]').forEach(b=>b.addEventListener('click',()=>{
+ document.querySelectorAll('[data-w]').forEach(x=>x.setAttribute('aria-pressed',x===b));
+ const p=document.getElementById('phone'); p.style.width=(+b.dataset.w)+'px'; p.style.height=(+b.dataset.h)+'px';
+}));
+</script>
+</body>
+</html>
